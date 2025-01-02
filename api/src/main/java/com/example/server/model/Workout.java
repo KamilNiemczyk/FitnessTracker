@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Workout {
@@ -22,16 +24,18 @@ public class Workout {
     @JsonBackReference
     private User user;
 
-//    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    private List<Exercise> exercises;
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Exercise> exercises;
 
     public Workout() {
+        this.exercises = new ArrayList<>();
     }
 
     public Workout(LocalDateTime start_time) {
         this.start_time = start_time;
         this.workout_duration = Duration.ofMinutes(0);
+        this.exercises = new ArrayList<>();
     }
 
     public Long getId() {
@@ -60,6 +64,15 @@ public class Workout {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void addExercise(Exercise exercise) {
+        exercise.setWorkout(this);
+        this.exercises.add(exercise);
     }
 
     @Override
