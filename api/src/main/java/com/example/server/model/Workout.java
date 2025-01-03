@@ -16,8 +16,8 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime start_time;
-    private Duration workout_duration;
+    private LocalDateTime startTime;
+    private Duration workoutDuration;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,8 +33,8 @@ public class Workout {
     }
 
     public Workout(LocalDateTime start_time) {
-        this.start_time = start_time;
-        this.workout_duration = Duration.ofMinutes(0);
+        this.startTime = start_time;
+        this.workoutDuration = Duration.ofMinutes(0);
         this.exercises = new ArrayList<>();
     }
 
@@ -43,19 +43,19 @@ public class Workout {
     }
 
     public LocalDateTime getStart_time() {
-        return start_time;
+        return startTime;
     }
 
     public void setStart_time(LocalDateTime start_time) {
-        this.start_time = start_time;
+        this.startTime = start_time;
     }
 
     public Duration getWorkout_duration() {
-        return workout_duration;
+        return workoutDuration;
     }
 
     public void setWorkout_duration(Duration workout_duration) {
-        this.workout_duration = workout_duration;
+        this.workoutDuration = workout_duration;
     }
 
     public User getUser() {
@@ -79,8 +79,8 @@ public class Workout {
     public String toString() {
         return "Workout{" +
                 "id=" + id +
-                ", start_time=" + start_time +
-                ", workout_duration=" + workout_duration +
+                ", start_time=" + startTime +
+                ", workout_duration=" + workoutDuration +
                 ", user_id=" + (user != null ? user.getId() : "null") +
                 '}';
     }

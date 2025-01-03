@@ -28,7 +28,7 @@ public class TokenValidationAspect {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
         }
 
-        String token = authHeader.substring(7); // Usunięcie "Bearer "
+        String token = authHeader.substring(7);
         try {
             Claims claims = jwtToken.validateToken(token);
             System.out.println("Token validated for user: " + claims.getSubject());

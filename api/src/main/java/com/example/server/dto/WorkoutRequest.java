@@ -1,4 +1,4 @@
-package com.example.server.controller;
+package com.example.server.dto;
 
 public class WorkoutRequest {
     private Long workoutId;

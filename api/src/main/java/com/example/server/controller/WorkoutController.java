@@ -1,6 +1,7 @@
 package com.example.server.controller;
 
 
+import com.example.server.dto.WorkoutRequest;
 import com.example.server.model.Exercise;
 import com.example.server.security.ValidateToken;
 import com.example.server.service.WorkoutService;
