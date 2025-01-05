@@ -3,6 +3,7 @@ package com.example.server.service;
 
 import com.example.server.model.Exercise;
 import com.example.server.model.ExerciseDictionary;
+import com.example.server.model.ExerciseRecord;
 import com.example.server.repository.ExerciseDictionaryRepository;
 import com.example.server.repository.ExerciseRepository;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,18 @@ public class ExerciseService {
         exercise.setExerciseDictionary(exerciseDictionary);
         exerciseRepository.save(exercise);
         return ResponseEntity.ok("Exercise NameAndBodyPart added to exercise");
+    }
+
+    public ResponseEntity<String> addExerciseRecord(Long exerciseId, Integer weight, Integer reps) {
+        Exercise exercise = exerciseRepository.findById(exerciseId).orElse(null);
+        if (exercise == null) {
+            return ResponseEntity.badRequest().body("Exercise not found");
+        }
+
+        ExerciseRecord exerciseRecord = new ExerciseRecord(weight, reps);
+        exercise.addExerciseRecord(exerciseRecord);
+        exerciseRepository.save(exercise);
+        return ResponseEntity.ok("Exercise record added");
     }
 
 }

@@ -29,4 +29,5 @@ public class ExerciseDictionaryService {
         exerciseDictionaryRepository.save(exerciseDictionary);
         return ResponseEntity.ok("Exercise name and body part added");
     }
+    
 }
