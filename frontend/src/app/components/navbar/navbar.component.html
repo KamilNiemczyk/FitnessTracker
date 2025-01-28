@@ -1,0 +1,18 @@
+<div class="navbar">
+    <div class="navbar_left">
+        <a routerLink="/">FitnessApp</a>
+    </div>
+    <div class="navbar_right">
+        <ul>
+            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/exercises">Exercises</a></li>
+            <li><a routerLink="/myworkouts">MyWorkouts</a></li>
+            <li><a routerLink="/profile">Profile</a></li>
+            @if(isLoggedIn === true){
+                <li><a>Sign out</a></li>
+            }@else{
+            <li><a routerLink="/signin">Sign in</a></li>
+            }
+        </ul>
+    </div>
+</div>
