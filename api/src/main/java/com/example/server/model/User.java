@@ -18,6 +18,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public enum Role {
+        USER,
+        ADMIN
+    }
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Workout> workouts;

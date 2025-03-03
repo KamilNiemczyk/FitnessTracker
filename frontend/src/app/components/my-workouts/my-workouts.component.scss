@@ -1,0 +1,49 @@
+.workouts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Odstęp między elementami */
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    h3{
+        color: white;
+        font-size: 30px;
+    }
+  }
+  
+.workout { 
+    margin: 10px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); 
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    transition: transform ease 0.7s;
+    .buttonsy{
+      display: flex;
+      gap:10px;
+    }
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+        transform: scale(1.1);
+    }
+    p{
+        margin: 5px 0;
+        color: white;
+    }
+}
+  
+  button {
+    background-color: rgba(150, 120, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: rgba(150, 120, 0, 0.7);
+    }
+  }

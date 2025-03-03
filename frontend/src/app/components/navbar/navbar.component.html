@@ -1,5 +1,6 @@
 <div class="navbar">
     <div class="navbar_left">
+        <button (click)="goBack()">◀Back</button>
         <a routerLink="/">FitnessApp</a>
     </div>
     <div class="navbar_right">
@@ -9,7 +10,9 @@
             <li><a routerLink="/myworkouts">MyWorkouts</a></li>
             <li><a routerLink="/profile">Profile</a></li>
             @if(isLoggedIn === true){
-                <li><a>Sign out</a></li>
+                <li>
+                    <a href="#" (click)="logout()" (keydown.enter)="logout()" (keydown.space)="logout()" tabindex="0">Sign out</a>
+                </li>
             }@else{
             <li><a routerLink="/signin">Sign in</a></li>
             }

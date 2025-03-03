@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ExercisesComponent } from './components/exercises/exercises.component';
-import { MyWorkoutsComponent } from './components/my-workouts/my-workouts.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { profileGuard } from './guards/profile-guard/profile.guard';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { signGuard } from './guards/signin-guard/sign.guard';
 
 export const routes: Routes = [
   {
@@ -19,16 +18,19 @@ export const routes: Routes = [
   },
   {
     path: "exercises",
-    component: ExercisesComponent
+    loadChildren: () => 
+      import('./components/exercises/exercises.routes').then((r) => r.EXERCISES_ROUTES)
   },
   {
     path: "myworkouts",
-    component: MyWorkoutsComponent,
+    loadChildren: () =>
+      import('./components/my-workouts/my-workouts.routes').then((r) => r.MYWORKOUTS_ROUTES),
     canActivate: [profileGuard]
   },
   {
     path: "signin",
-    component: SignInComponent
+    component: SignInComponent,
+    canActivate: [signGuard]
   },
   {
     path: "**",

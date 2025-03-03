@@ -15,6 +15,15 @@
             font-size: 1.5rem;
             font-weight: 500;
             text-decoration: none;
+            margin-left: 30px;
+        }
+        button{
+            background-color: rgba(0,0,0,0.1);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
     }
     .navbar_right{
@@ -45,9 +54,6 @@
         overflow-x: hidden;
         .navbar_left{
             margin-left: 0;
-            p{
-                font-size: 1.2rem;
-            }
         }
         .navbar_right{
             margin-right: 0;

@@ -1,1 +1,74 @@
-<p>exercises works!</p>
+<div class="exercises-page">
+        <div class="exercise-filter" [formGroup]="filterForm">
+            <h2>Filter by name</h2>
+            <input type="text" formControlName="text" placeholder="Enter exercise name">
+            <h2>Filter by body part</h2>
+            <select formControlName="bodyPartName">
+                @for(bodyPart of bodyPartNames; track bodyPart){
+                    <option [value]="bodyPart">{{bodyPart}}</option>
+                }
+            </select>
+            <h2>Filter by difficulty</h2>
+            <!-- <select formControlName="difficulty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select> -->
+            <input type="checkbox" formControlName="difficulty1" value="1">1
+            <input type="checkbox" formControlName="difficulty2" value="2">2
+            <input type="checkbox" formControlName="difficulty3" value="3">3
+            <input type="checkbox" formControlName="difficulty4" value="4">4
+            <input type="checkbox" formControlName="difficulty5" value="5">5
+            <h2>Sort by difficulty</h2>
+            <select formControlName="difficultyDirection">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <h2>Sort alphabetically</h2>
+            <select formControlName="alphabetical">
+                <option value="asc">A-Z</option>
+                <option value="desc">Z-A</option>
+            </select>
+            <h2>Paginate</h2>
+            <select formControlName="pagination">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+            </select>
+            <button (click)="filterByParams()">Filter</button>
+            <button (click)="resetFilter()">Reset</button>
+        </div>
+        @if(exercisesDictionary.length === 0){
+            <div class="no-exercises">
+                <h1>No exercises found</h1>
+            </div>
+        }@else{
+        <div class="exercises-container">
+            <div class="exercises">
+                @for(exercise of exercisesDictionary; track exercise.id){
+                    <div class="exercise">
+                        <h2>Body part :</h2>
+                        <h2> {{exercise.bodyPartName}}</h2>
+                        <p>Name: {{exercise.exerciseName}}</p>
+                        <p>Difficulty: {{exercise.difficulty}}</p>
+                        @if(isAdmin){
+                            <button (click)="goToAdminEdit(exercise.id)">Edit</button>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="pagination">
+                <button (click)="paginate('prev')">Previous</button>
+                @if(isAdmin){
+                    <button (click)="goToAdminAdd()">Add</button>
+                }
+                <button (click)="paginate('next')">Next</button>
+            </div>
+        </div>
+    }
+    </div>

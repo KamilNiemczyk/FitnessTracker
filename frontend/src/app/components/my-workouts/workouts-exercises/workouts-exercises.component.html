@@ -1,0 +1,49 @@
+<div class="exe">
+    <div [formGroup]="ExerciseForm" class="form">
+        <label for="exerciseDictionaryId">Choose Exercise</label>
+        <select formControlName="exerciseDictionaryId">
+            @for(exercise of exerciseDictionary; track exercise.id){
+                <option [value]="exercise.id">{{exercise.bodyPartName}} : {{exercise.exerciseName}}</option>
+            }
+        </select>
+        <div class="records">
+            <label for="records">Records</label>
+            @for(recordForm of records.controls; track $index){
+                <div [formGroup]="recordForm">
+                    <label for="weight">Weight</label>
+                    <input type="number" formControlName="weight">
+                    <label for="reps">Reps</label>
+                    <input type="number" formControlName="reps">
+                    <button (click)="deleteRecord($index)">Remove Record</button>
+                </div>
+            }
+        </div>
+        @if(error){
+            <p>{{error}}</p>
+        }
+        <div class="buttons">
+            <button (click)="addRecord()">Add Record</button>
+            <button (click)="saveExercise()">Save</button>
+        </div>
+    </div>
+@for(exercise of exercises; track exercise.id){
+        <div class="exercise">
+            <h2>Exercise</h2>
+            <p>Body part: {{exercise.exerciseDictionary.bodyPartName}}</p>
+            <p>Exercise: {{exercise.exerciseDictionary.exerciseName}}</p>
+            <div class="records">
+                <h3>Records</h3>
+                @for(record of exercise.exerciseRecords; track record.id){
+                    <div class="record">
+                        <h4>Set number: {{$index + 1}}</h4>
+                        <p>Weight: {{record.weight}}</p>
+                        <p>Reps: {{record.reps}}</p>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+@if(exercises.length === 0){
+    <h2>No exercises</h2>
+}
+</div>

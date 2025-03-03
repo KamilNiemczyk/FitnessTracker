@@ -1,1 +1,67 @@
-<p>sign-in works!</p>
+<div class="login-register">
+<div class="forms-container">
+    @if(isLoginView){
+    <div [formGroup]="signInForm" class="login-form">
+            <h2>Sign In</h2>
+            <input type="text" formControlName="email" placeholder="Email">
+            <input type="password" formControlName="password" placeholder="Password">
+            <!-- @if(signInForm.get('email')?.invalid && signInForm.get('email')?.touched) {
+            @if(signInForm.get('email')?.errors?.['required']) {
+                <p>Email is required</p>
+            }
+            @if(signInForm.get('email')?.errors?.['email']) {
+                <p>Email is invalid</p>
+            }
+            }
+            @if(signInForm.get('password')?.invalid && signInForm.get('password')?.touched) {
+                @if(signInForm.get('password')?.errors?.['required']) {
+                    <p>Password is required</p>
+                }
+            } -->
+            <div class="buttons">
+                <button (click)="signIn()">Sign In</button>
+                @if(error){
+                <p>{{error}}</p>
+                }
+                <p>Don't have an account?</p>
+                <p>Click below to sign up</p>
+                <button class="withoutcolor" (click)="changeView()">Sign Up</button>
+            </div>
+        </div>
+    }@else{
+    <div class="register-form" [formGroup]="signUpForm">
+            <h2>Sign Up</h2>
+            <input type="text" formControlName="name" placeholder="Name">
+            <input type="text" formControlName="email" placeholder="Email">
+            <input type="password" formControlName="password" placeholder="Password">
+            <!-- @if(signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched) {
+            @if(signUpForm.get('name')?.errors?.['required']) {
+                <p>Name is required</p>
+            }
+            }
+            @if(signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched) {
+            @if(signUpForm.get('email')?.errors?.['required']) {
+                <p>Email is required</p>
+            }
+            @if(signUpForm.get('email')?.errors?.['email']) {
+                <p>Email is invalid</p>
+            }
+            }
+            @if(signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched) {
+                @if(signUpForm.get('password')?.errors?.['required']) {
+                    <p>Password is required</p>
+                }
+            } -->
+            <div class="buttons">
+                <button (click)="signUp()">Sign Up</button>
+                @if(error){
+                <p>{{error}}</p>
+                }
+                <p>Already have an account?</p>
+                <p>Click below to sign in</p>
+                <button class="withoutcolor" (click)="changeView()">Sign In</button>
+            </div>
+        </div>
+}
+</div>
+</div>

@@ -3,6 +3,7 @@ package com.example.server.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.Duration;
@@ -16,7 +17,10 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonProperty("startTime")
     private LocalDateTime startTime;
+
+    @JsonProperty("workoutDuration")
     private Duration workoutDuration;
 
     @ManyToOne
@@ -32,8 +36,8 @@ public class Workout {
         this.exercises = new ArrayList<>();
     }
 
-    public Workout(LocalDateTime start_time) {
-        this.startTime = start_time;
+    public Workout(LocalDateTime startTime) {
+        this.startTime = startTime;
         this.workoutDuration = Duration.ofMinutes(0);
         this.exercises = new ArrayList<>();
     }
@@ -42,20 +46,20 @@ public class Workout {
         return id;
     }
 
-    public LocalDateTime getStart_time() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStart_time(LocalDateTime start_time) {
-        this.startTime = start_time;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
-    public Duration getWorkout_duration() {
+    public Duration getWorkoutDuration() {
         return workoutDuration;
     }
 
-    public void setWorkout_duration(Duration workout_duration) {
-        this.workoutDuration = workout_duration;
+    public void setWorkoutDuration(Duration workoutDuration) {
+        this.workoutDuration = workoutDuration;
     }
 
     public User getUser() {

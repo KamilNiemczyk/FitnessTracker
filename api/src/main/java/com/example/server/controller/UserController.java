@@ -1,5 +1,6 @@
 package com.example.server.controller;
 
+import com.example.server.dto.PasswordDto;
 import com.example.server.model.Workout;
 import com.example.server.security.ValidateToken;
 import org.slf4j.Logger;
@@ -54,4 +55,36 @@ public class UserController {
         String token = request.getHeader("Authorization").substring(7);
         return userService.getWorkouts(token);
     }
+
+    @ValidateToken
+    @GetMapping("/workout")
+    public ResponseEntity<Workout> getWorkout(HttpServletRequest request, @RequestParam Long id) {
+        String token = request.getHeader("Authorization").substring(7);
+        return userService.getWorkout(token, id);
+    }
+
+    @ValidateToken
+    @GetMapping("/isAdmin")
+    public ResponseEntity<Boolean> isAdmin(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").substring(7);
+        if(token == null) {
+            return ResponseEntity.ok(false);
+        }
+        return userService.isAdmin(token);
+    }
+
+    @ValidateToken
+    @DeleteMapping("/delete-workout")
+    public ResponseEntity<String> deleteWorkout(HttpServletRequest request, @RequestParam Long id) {
+        String token = request.getHeader("Authorization").substring(7);
+        return userService.deleteWorkout(token, id);
+    }
+
+    @ValidateToken
+    @PutMapping("/password")
+    public ResponseEntity<String> changePassword(HttpServletRequest request, @RequestBody PasswordDto newPassword) {
+        String token = request.getHeader("Authorization").substring(7);
+        return userService.changePassword(token, newPassword.getPassword());
+    }
+
 }

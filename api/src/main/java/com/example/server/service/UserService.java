@@ -3,6 +3,7 @@ package com.example.server.service;
 
 import com.example.server.model.Workout;
 import com.example.server.repository.UserRepository;
+import com.example.server.repository.WorkoutRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import com.example.server.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.server.security.JwtToken;
-
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,10 +21,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtToken jwtToken;
-    public UserService(UserRepository userRepository, JwtToken jwtToken) {
+    private final WorkoutRepository workoutRepository;
+
+    public UserService(UserRepository userRepository, JwtToken jwtToken, WorkoutRepository workoutRepository) {
         this.jwtToken = jwtToken;
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        this.workoutRepository = workoutRepository;
     }
     //
     public ResponseEntity<String> registerUser(User user) {
@@ -52,7 +55,7 @@ public class UserService {
             return ResponseEntity.ok(token);
         }
         logger.error("Invalid username or password");
-        return ResponseEntity.status(401).body("Invalid email or password");
+        return ResponseEntity.status(401).body("{\"message\":\"Invalid email or password\"}");
     }
     public void deleteAllUsers() {
         userRepository.deleteAll();
@@ -78,5 +81,60 @@ public class UserService {
             return null;
         }
         return user.getWorkouts();
+    }
+
+    public ResponseEntity<Boolean> isAdmin(String token) {
+        Long getId = jwtToken.validateToken(token).get("id", Long.class);
+        User user = userRepository.findById(getId).orElse(null);
+        if (user == null) {
+            logger.error("User not found");
+            return ResponseEntity.ok(false);
+        }
+        return ResponseEntity.ok(user.getRole().equals(User.Role.ADMIN));
+    }
+
+    public ResponseEntity<Workout> getWorkout(String token, Long id) {
+        Long getId = jwtToken.validateToken(token).get("id", Long.class);
+        User user = userRepository.findById(getId).orElse(null);
+        if (user == null) {
+            logger.error("User not found");
+            return ResponseEntity.badRequest().body(null);
+        }
+        Workout workout = user.getWorkouts().stream().filter(w -> w.getId().equals(id)).findFirst().orElse(null);
+        if (workout == null) {
+            logger.error("Workout not found");
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(workout);
+    }
+
+    public ResponseEntity<String> deleteWorkout(String token, Long id) {
+        Long getId = jwtToken.validateToken(token).get("id", Long.class);
+        User user = userRepository.findById(getId).orElse(null);
+        if (user == null) {
+            logger.error("User not found");
+            return ResponseEntity.badRequest().body("User not found");
+        }
+        Workout workout = user.getWorkouts().stream().filter(w -> w.getId().equals(id)).findFirst().orElse(null);
+        if (workout == null) {
+            logger.error("Workout not found");
+            return ResponseEntity.badRequest().body("Workout not found");
+        }
+        user.getWorkouts().remove(workout);
+        workoutRepository.delete(workout);
+        userRepository.save(user);
+        return ResponseEntity.ok("Workout deleted successfully");
+    }
+
+    public ResponseEntity<String> changePassword(String token, String newPassword) {
+        Long getId = jwtToken.validateToken(token).get("id", Long.class);
+        User user = userRepository.findById(getId).orElse(null);
+        if (user == null) {
+            logger.error("User not found");
+            return ResponseEntity.badRequest().body("User not found");
+        }
+        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        userRepository.save(user);
+        return ResponseEntity.ok("Password changed successfully");
     }
 }

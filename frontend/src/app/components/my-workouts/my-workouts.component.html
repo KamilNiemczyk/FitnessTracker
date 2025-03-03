@@ -1,1 +1,22 @@
-<p>my-workouts works!</p>
+<div class="workouts">
+    <h3>My Workouts</h3>
+    <button (click)="addWorkout()">Add Workout</button>
+    @if(myWorkouts.length === 0){
+        <p>No workouts</p>
+    }
+    @if(sortDate === 'asc'){
+        <button (click)="sortByDate()">Sort from newest (currently by oldest)</button>
+    } @else {
+        <button (click)="sortByDate()">Sort from oldest (currently by newest)</button>
+    }
+    @for(workout of myWorkouts; track workout.id){
+        <div class="workout">
+            <p>Workout</p>
+            <p>Start time: {{workout.startTime}}</p>
+            <div class="buttonsy">
+                <button (click)="goToExercises(workout.id)">Go to workout</button>
+                <button (click)="deleteWorkout(workout.id)">Delete workout</button>
+            </div>
+        </div>
+    }
+</div>

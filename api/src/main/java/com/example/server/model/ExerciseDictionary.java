@@ -1,10 +1,9 @@
 package com.example.server.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class ExerciseDictionary {
@@ -14,13 +13,18 @@ public class ExerciseDictionary {
 
     private String bodyPartName;
     private String exerciseName;
+    private Integer difficulty;
+
+    @OneToMany(mappedBy = "exerciseDictionary", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Exercise> exercises;
 
     public ExerciseDictionary() {
     }
 
-    public ExerciseDictionary(String body_part_name, String exercise_name) {
+    public ExerciseDictionary(String exercise_name, String body_part_name, Integer difficulty) {
         this.bodyPartName = body_part_name;
         this.exerciseName = exercise_name;
+        this.difficulty = difficulty;
     }
 
     public Long getId() {
@@ -41,5 +45,12 @@ public class ExerciseDictionary {
 
     public void setExerciseName(String exercise_name) {
         this.exerciseName = exercise_name;
+    }
+    public Integer getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
     }
 }

@@ -1,0 +1,166 @@
+.exercises-page{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 40px;
+    
+}
+.exercises-container {
+    width: 80%;
+    height: calc(100vh - 110px);
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 40px;
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        margin: 0 5px;
+        margin-bottom: 10px;
+        padding: 2vh 10vw;
+        border: none;
+        border-radius: 20px;
+        background-color: rgba(0, 0, 0, 0.5); 
+        color: rgba(255, 255, 255, 0.72); 
+        cursor: pointer;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.9); 
+        }
+      }
+    }
+  }
+  .exercises {
+    width: 100%;
+    max-width: 100%; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    .exercise {
+      flex: 1 1 300px; 
+      margin: 10px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7); 
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+      transition: transform 0.3s ease;
+      button{
+        width: 30%;
+        padding: 10px;
+        margin: 0 5px;
+        border: none;
+        border-radius:8px;
+        color: rgba(255, 255, 255, 0.72); 
+        background-color: rgba(150, 120, 0, 0.5);
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(150, 120, 0, 0.7); 
+        }
+      }
+  
+      &:hover {
+        transform: translateY(-5px); 
+      }
+      h2{
+        font-size: 1.5em;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      p {
+        font-size: 1.1em;
+        color: rgba(255, 255, 255, 0.72); 
+      }
+  }
+}
+
+.no-exercises {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  height: calc(100vh - 110px);
+  padding-right: 40px;
+  h1 {
+    font-size:2rem;
+    color: rgba(255, 255, 255, 0.72); 
+  }
+}
+
+
+.exercise-filter {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.72);
+  width: 300px;
+  margin-top: 10vh;
+  height: fit-content;
+  margin-right: 20px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 20px;
+
+  h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  input[type="text"]{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  input[type="checkbox"] {
+    margin-right: 10px;
+    width : 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+  
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+  }
+}

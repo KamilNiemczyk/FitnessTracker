@@ -1,6 +1,7 @@
 package com.example.server.controller;
 
 
+import com.example.server.dto.CreateExerciseRequest;
 import com.example.server.dto.ExerciseDictionaryRequest;
 import com.example.server.model.ExerciseRecord;
 import com.example.server.service.ExerciseService;
@@ -31,5 +32,10 @@ public class ExerciseController {
     @PostMapping("add-exercise-record")
     public ResponseEntity<String> addExerciseRecord(@RequestBody ExerciseRecordRequest request) {
         return exerciseService.addExerciseRecord(request.getExerciseId(), request.getWeight(), request.getReps());
+    }
+
+    @PostMapping("create-exercise-with-records")
+    public ResponseEntity<String> createExerciseWithDictionaryIdAndRecords(@RequestBody CreateExerciseRequest request) {
+        return exerciseService.createExerciseWithDictionaryIdAndRecords(request.getWorkoutId(), request.getOrderInWorkout(), request.getExerciseDictionaryId(), request.getRecords());
     }
 }

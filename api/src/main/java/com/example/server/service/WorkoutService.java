@@ -39,4 +39,6 @@ public class WorkoutService {
     public List<Exercise> getExercises(Long workoutId) {
         return workoutRepository.findById(workoutId).get().getExercises();
     }
+
+
 }

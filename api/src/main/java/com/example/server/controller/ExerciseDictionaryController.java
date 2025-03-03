@@ -28,8 +28,22 @@ public class ExerciseDictionaryController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addExerciseDictionary(@RequestBody AddExerciseDictionaryRequest request) {
-        return exerciseDictionaryService.addExerciseDictionary(request.getExerciseName(), request.getBodyPartName());
+        return exerciseDictionaryService.addExerciseDictionary(request.getExerciseName(), request.getBodyPartName(), request.getDifficulty());
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteExerciseDictionary(@RequestParam Long id) {
+        return exerciseDictionaryService.deleteExerciseDictionary(id);
+    }
+
+    @GetMapping("/get-by-id")
+    public ResponseEntity<ExerciseDictionary> getExerciseDictionaryById(@RequestParam Long id) {
+        return exerciseDictionaryService.getExerciseDictionaryById(id);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateExerciseDictionary(@RequestParam Long id, @RequestBody AddExerciseDictionaryRequest request) {
+        return exerciseDictionaryService.updateExerciseDictionary(id, request.getExerciseName(), request.getBodyPartName(), request.getDifficulty());
+    }
 
 }

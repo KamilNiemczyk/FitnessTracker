@@ -3,6 +3,7 @@ package com.example.server.dto;
 public class AddExerciseDictionaryRequest {
     private String bodyPartName;
     private String exerciseName;
+    private Integer difficulty;
 
     public String getBodyPartName() {
         return bodyPartName;
@@ -19,4 +20,13 @@ public class AddExerciseDictionaryRequest {
     public void setExerciseName(String exerciseName) {
         this.exerciseName = exerciseName;
     }
+
+    public Integer getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
+    }
+
 }

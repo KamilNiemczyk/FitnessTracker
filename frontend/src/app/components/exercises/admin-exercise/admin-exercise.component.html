@@ -1,0 +1,27 @@
+@if(modalOpen){
+    <app-modal (confirmed)="onConfirm()" (closed)="onClose()"></app-modal>
+}
+<div class="container">
+    <div [formGroup]="addOrEditExerciseForm" class="form">
+        @if(isEdit){
+            <h2>Edit exercise</h2>
+        }@else{
+            <h2>Add exercise</h2>
+        }
+        <input type="text" formControlName="exerciseName" placeholder="Exercise Name">
+        <input type="text" formControlName="bodyPartName" placeholder="Body Part Name">
+        <input type="number" formControlName="difficulty" placeholder="Difficulty" min="1" max="5" step="1">
+        @if(isEdit){
+            @if(error){
+                <p>{{error}}</p>
+            }
+            <button (click)="editExercise()">Edit</button>
+            <button (click)="deleteExercise()">Delete</button>
+        }@else{
+            @if(error){
+                <p>{{error}}</p>
+            }
+            <button (click)="addExercise()">Add</button>
+        }
+    </div>
+</div>
